@@ -5,6 +5,8 @@ public class CarController : MonoBehaviour
     public float acceleration = 10f;
     public float maxspeed = 20f;
     public float turnspeed = 2.5f;
+
+    public float traction = 1.0f;
     //public float extragravity = 10f;
 
     private Rigidbody rb;
@@ -75,7 +77,7 @@ public class CarController : MonoBehaviour
 
                 float speed = flatvelocity.magnitude;
                 Vector3 targetvelocity = flatforward * speed * (Vector3.Dot(rb.linearVelocity, flatforward) >= 0 ? 1f : -1f);
-                rb.AddForce(targetvelocity - flatvelocity, ForceMode.Acceleration);
+                rb.AddForce(traction * (targetvelocity - flatvelocity), ForceMode.Acceleration);
             }
         }
 

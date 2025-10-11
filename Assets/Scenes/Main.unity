@@ -250,8 +250,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 43055982}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12776037, y: -0.6084125, z: 0.100059, w: 0.7768525}
-  m_LocalPosition: {x: 23.89275, y: 10.887151, z: -12.306879}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -439,11 +439,11 @@ Transform:
   m_GameObject: {fileID: 248808120}
   serializedVersion: 2
   m_LocalRotation: {x: 0.17842482, y: -1.3178808e-12, z: 2.3897738e-13, w: 0.98395354}
-  m_LocalPosition: {x: 0, y: 3.6, z: -8}
+  m_LocalPosition: {x: -0.59164, y: 2.85021, z: -8.57256}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1281455023}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &261108504
 GameObject:
@@ -534,12 +534,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261108504}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: -8}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.59164, y: 2.25021, z: -8.57256}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1281455023}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &261108509
 MonoBehaviour:
@@ -655,7 +655,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarController
   acceleration: 100
   maxspeed: 20
-  turnspeed: 1
+  turnspeed: 2
+  traction: 10
 --- !u!1 &458544464
 GameObject:
   m_ObjectHideFlags: 0
@@ -1360,12 +1361,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 870815728}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: -8}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.59164, y: 2.25021, z: -8.57256}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1281455023}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1215971421
 GameObject:
@@ -1480,6 +1481,40 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1215971421}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1281455022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1281455023}
+  m_Layer: 0
+  m_Name: Camera Stuff
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1281455023
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281455022}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.59164, y: 0.74979, z: 0.57256}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 870815733}
+  - {fileID: 261108508}
+  - {fileID: 248808122}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1382017209
 GameObject:
   m_ObjectHideFlags: 0
@@ -2191,8 +2226,6 @@ SceneRoots:
   - {fileID: 186021168}
   - {fileID: 322669264}
   - {fileID: 43055986}
-  - {fileID: 870815733}
-  - {fileID: 261108508}
-  - {fileID: 248808122}
   - {fileID: 747067826}
   - {fileID: 809859462}
+  - {fileID: 1281455023}
