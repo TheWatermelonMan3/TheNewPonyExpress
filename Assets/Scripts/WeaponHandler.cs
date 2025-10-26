@@ -11,6 +11,8 @@ public class WeaponHandler : MonoBehaviour
     private int rangeMin = 69;
     private int rangeMax = 112;
 
+    private int ammoCount = 20;
+
     private void Update()
     {
         HandleInput();
@@ -26,64 +28,6 @@ public class WeaponHandler : MonoBehaviour
     {
         return ang%180;
     }
-
-
-    //snap to 45 deg
-    private int closestBigAngle(float currentAngle)
-    {
-        currentAngle = currentAngle % 180;
-
-        float a = (float)(currentAngle) / 45.0f;
-        if(a <= 0.5 && a >= -0.5)
-        {
-            return 0;
-        }
-        else if(a > 0.5 && a <= 1.5)
-        {
-            return 45;
-        }
-        else if(a > 1.5 && a <= 2.5)
-        {
-            return 90;
-        }
-        else if(a > 2.5 && a <= 3.5)
-        {
-            return 135;
-        }
-        else if(a > 3.5 && a <= 4.5)
-        {
-            return 180;
-        }
-        else if(a > 4.5 && a <= 5.5)
-        {
-            return 225;
-        }
-        else if(a > 5.5 && a <= 6.5)
-        {
-            return 270;
-        }
-        else if(a < -0.5 && a >= -1.5)
-        {
-            return -45;
-        }
-        else if(a < -1.5 && a >= -2.5)
-        {
-            return -90;
-        }
-        else if(a < -2.5 && a >= -3.5)
-        {
-            return -135;
-        }
-        else if(a < -3.5 && a >= -4.5)
-        {
-            return -180;
-        }
-
-        Debug.Log(a);
-        //shouldnt be an else but just in case
-        return -1;
-    }
-
 
     private void HandleInput()
     {
