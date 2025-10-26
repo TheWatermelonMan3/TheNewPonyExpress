@@ -17,6 +17,15 @@ public class WeaponHandler : MonoBehaviour
         {
             FireBullet();
         }
+        Vector3 rotation = new Vector3(10,0,0);
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            transform.Rotate(rotation);
+        }
+        else if(Input.GetKeyDown(KeyCode.A))
+        {
+            transform.Rotate(-rotation);
+        }
     }
 
     private void FireBullet()
