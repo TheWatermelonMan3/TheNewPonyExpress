@@ -108,6 +108,7 @@ public class WeaponHandler : MonoBehaviour
         }
 
         Vector3 rotation = new Vector3(1,0,0);
+        Vector3 rotationUp = new Vector3(0,0,-1);
 
         if(Input.GetKey(KeyCode.S))
         {
@@ -116,6 +117,14 @@ public class WeaponHandler : MonoBehaviour
         else if(Input.GetKey(KeyCode.A))
         {
             if(angleWrapped() - 1 >= rangeMin) transform.Rotate(-rotation);
+        }
+        else if(Input.GetKey(KeyCode.E))
+        {
+            transform.Rotate(rotationUp);
+        }
+        else if(Input.GetKey(KeyCode.D))
+        {
+            transform.Rotate(-rotationUp);
         }
     }
 
