@@ -3,6 +3,7 @@ using UnityEngine;
 public class YawAnchor : MonoBehaviour
 {
     public Transform car; // assign your car in the Inspector
+    public float pitchdown;
 
     void LateUpdate()
     {
@@ -13,6 +14,6 @@ public class YawAnchor : MonoBehaviour
 
         // Copy only yaw (rotation around Y axis)
         Vector3 euler = car.eulerAngles;
-        transform.rotation = Quaternion.Euler(0f, euler.y, 0f);
+        transform.rotation = Quaternion.Euler(0f, euler.y, 0f) * Quaternion.Euler(pitchdown, 0f, 0f);
     }
 }

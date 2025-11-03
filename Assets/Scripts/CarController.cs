@@ -5,16 +5,30 @@ public class CarController : MonoBehaviour
     public float acceleration = 10f;
     public float maxspeed = 20f;
     public float turnspeed = 2.5f;
-    public float driftturn = 4.0f;
+
+    public float driftcontrol = 4.0f;
+    public float driftturnspeed = 8.0f;
 
     public float traction = 1.0f;
     //public float extragravity = 10f;
+    public GameObject SkidMark;
+
+    public Transform wheel1;
+    public Transform wheel2;
+    public Transform wheel3;
+    public Transform wheel4;
+
+    private TrailRenderer skid1;
+    private TrailRenderer skid2;
+    private TrailRenderer skid3;
+    private TrailRenderer skid4;
 
     private Rigidbody rb;
 
     private bool driftEngage = false;
     private float turnMemory = 0f;
     private float turnAmount = 0f;
+    private float turnInput = 0f;
     //public float hoverHeight = 1f;
 
     //public float hoverForce = 1f;
@@ -31,13 +45,26 @@ public class CarController : MonoBehaviour
         tensor.y *= 5f; // increase resistance to yaw by 2×
         tensor.x *= 0.2f; // increase resistance to roll by 5×
         rb.inertiaTensor = tensor;
+
+        GameObject trailprefab1 = Instantiate(SkidMark, wheel1.position, Quaternion.identity, wheel1);
+        skid1 = trailprefab1.GetComponent<TrailRenderer>();
+        skid1.emitting = false;
+        GameObject trailprefab2 = Instantiate(SkidMark, wheel2.position, Quaternion.identity, wheel2);
+        skid2 = trailprefab2.GetComponent<TrailRenderer>();
+        skid2.emitting = false;
+        GameObject trailprefab3 = Instantiate(SkidMark, wheel3.position, Quaternion.identity, wheel3);
+        skid3 = trailprefab3.GetComponent<TrailRenderer>();
+        skid3.emitting = false;
+        GameObject trailprefab4 = Instantiate(SkidMark, wheel4.position, Quaternion.identity, wheel4);
+        skid4 = trailprefab4.GetComponent<TrailRenderer>();
+        skid4.emitting = false;
     }
 
     void Update()
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            if (!driftEngage) turnMemory = turnAmount;
+            if (!driftEngage) turnMemory = turnInput * driftturnspeed;
             driftEngage = true;
         }
         else
@@ -82,12 +109,12 @@ public class CarController : MonoBehaviour
             }*/
 
             // Steering
-            float turnInput = Input.GetAxis("Horizontal");
+            turnInput = Input.GetAxis("Horizontal");
 
             if (flatvelocity.magnitude > 0.1f)
             {
                 if (!driftEngage) turnAmount = turnInput * flatvelocity.magnitude * turnspeed * Time.fixedDeltaTime;
-                else turnAmount = turnMemory + (turnInput * driftturn * Time.fixedDeltaTime);
+                else turnAmount = turnMemory * Time.fixedDeltaTime + (turnInput * driftcontrol * Time.fixedDeltaTime);
                 Quaternion turnRotation = Quaternion.Euler(0f, turnAmount, 0f);
                 rb.MoveRotation(rb.rotation * turnRotation);
 
@@ -100,6 +127,27 @@ public class CarController : MonoBehaviour
                     rb.AddForce(traction * (targetvelocity - flatvelocity), ForceMode.Acceleration);
                 }
             }
+
+            if (driftEngage)
+            {
+                skid1.emitting = true;
+                skid2.emitting = true;
+                skid3.emitting = true;
+                skid4.emitting = true;
+            } else
+            {
+                skid1.emitting = false;
+                skid2.emitting = false;
+                skid3.emitting = false;
+                skid4.emitting = false;
+            }
+
+        } else
+        {
+            skid1.emitting = false;
+            skid2.emitting = false;
+            skid3.emitting = false;
+            skid4.emitting = false;
         }
     }
 
