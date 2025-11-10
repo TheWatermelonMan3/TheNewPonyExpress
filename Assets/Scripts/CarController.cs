@@ -94,14 +94,23 @@ public class CarController : MonoBehaviour
 
         //rb.AddForce(Vector3.down * extragravity, ForceMode.Acceleration);
 
-        float dragCoeff = acceleration / (maxspeed * maxspeed);
-        Vector3 drag = (-1 * dragCoeff * flatvelocity.magnitude) * flatvelocity;
+        //float dragCoeff = acceleration / (maxspeed);
+        //Vector3 drag = (-1 * dragCoeff) * flatvelocity;
+        float dragCoeff = acceleration / (maxspeed /* * maxspeed */);
+        Vector3 drag = (-1 * dragCoeff /* * flatvelocity.magnitude*/) * flatvelocity;
 
         if (IsGrounded())
         {
             // Driving
             rb.AddForce(force, ForceMode.Acceleration);
-            rb.AddForce(drag, ForceMode.Acceleration);
+            if (driftEngage)
+            {
+                rb.AddForce(1.6f * drag, ForceMode.Acceleration);
+            }
+            else
+            {
+                rb.AddForce(drag, ForceMode.Acceleration);
+            }
 
             /*if (speedproj.magnitude < maxspeed * (Vector3.Dot(flatvelocity, flatforward) >= 0 ? 1f : 0.5f) || Vector3.Dot(flatvelocity, force) < 0)
             {
@@ -114,7 +123,7 @@ public class CarController : MonoBehaviour
             if (flatvelocity.magnitude > 0.1f)
             {
                 if (!driftEngage) turnAmount = turnInput * flatvelocity.magnitude * turnspeed * Time.fixedDeltaTime;
-                else turnAmount = turnMemory * Time.fixedDeltaTime + (turnInput * driftcontrol * Time.fixedDeltaTime);
+                else turnAmount = turnMemory * flatvelocity.magnitude * Time.fixedDeltaTime + (turnInput * flatvelocity.magnitude * driftcontrol * Time.fixedDeltaTime);
                 Quaternion turnRotation = Quaternion.Euler(0f, turnAmount, 0f);
                 rb.MoveRotation(rb.rotation * turnRotation);
 
