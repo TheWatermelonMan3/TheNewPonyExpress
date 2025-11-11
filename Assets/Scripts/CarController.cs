@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
-    public float acceleration = 10f;
-    public float maxspeed = 20f;
-    public float turnspeed = 2.5f;
+    public float acceleration;// = 10f;
+    public float maxspeed;// = 20f;
+    public float turnspeed;// = 2.5f;
 
-    public float driftcontrol = 4.0f;
-    public float driftturnspeed = 8.0f;
+    public float driftcontrol;// = 4.0f;
+    public float driftturnspeed;// = 8.0f;
 
-    public float traction = 1.0f;
+    public float traction;// = 1.0f;
     //public float extragravity = 10f;
     public GameObject SkidMark;
 
