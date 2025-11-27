@@ -153,6 +153,8 @@ public class CarController : MonoBehaviour
 
         } else
         {
+            //if (driftEngage) turnMemory = 0f;
+            //driftEngage = false;
             skid1.emitting = false;
             skid2.emitting = false;
             skid3.emitting = false;
